@@ -34,13 +34,13 @@ export default function App() {
               iconName = icons.Alert;
             }
 
-            return <Image source={iconName} style={{ width: 30, height: 30, tintColor: focused ? '#FFFFFF' : '#FFFFFF' }} />;
+            return <Image source={iconName} style={{ width: 30, height: 30, tintColor: focused ? '#cfd4ff' : '#FFFFFF' }} />;
           },
           headerShown: false,
           tabBarShowLabel: false,
           tabBarActiveTintColor: '#FFFFFF',
           tabBarInactiveTintColor: '#FFFFFF',
-          tabBarStyle: { height: 100, paddingBottom: 30, backgroundColor: '#5790DF', borderTopLeftRadius: 30, borderTopRightRadius: 30 },
+          tabBarStyle: { height: 100, paddingTop: 20, backgroundColor: '#5790df' },
         })}
       >
         <Tab.Screen name="Home" component={TelaHome} />
