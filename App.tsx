@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Image } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -6,6 +6,9 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { TelaHome } from './src/pages/TelaHome';
 import { TelaPerfilUsuario } from './src/pages/TelaPerfilUsuario';
 import { TelaChat } from './src/pages/TelaChat';
+import { PaymentScreen } from './src/pages/TelaPagamento';
+
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Tab = createBottomTabNavigator();
 
@@ -17,10 +20,34 @@ const icons = {
 };
 
 export default function App() {
+  const [is_payment_active, setIsPaymentActive] = useState(Boolean);
+
+  const getData = async () => {
+    try {
+      const value = await AsyncStorage.getItem('@payment_storage');
+      if (value !== null) {
+        if(value === 'true') {
+          setIsPaymentActive(true)
+        } else {
+          setIsPaymentActive(false)
+        }
+      } else {
+        setIsPaymentActive(false)
+      }
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  useEffect(() => {
+    getData();
+  }, []);
+
   return (
     <NavigationContainer>
-      <Tab.Navigator
-        initialRouteName="Perfil" 
+      {is_payment_active ? (
+        <Tab.Navigator
+        initialRouteName="Perfil"
         screenOptions={({ route }) => ({
           tabBarIcon: ({ focused }) => {
             let iconName;
@@ -31,6 +58,8 @@ export default function App() {
             } else if (route.name === 'Chat') {
               iconName = icons.Chat;
             } else if (route.name === 'Notification') {
+              iconName = icons.Alert;
+            } else {
               iconName = icons.Alert;
             }
 
@@ -48,6 +77,9 @@ export default function App() {
         <Tab.Screen name="Perfil" component={TelaPerfilUsuario} />
         <Tab.Screen name="Notification" component={TelaPerfilUsuario} />
       </Tab.Navigator>
+      ) : (
+        <PaymentScreen />
+      )} 
     </NavigationContainer>
   );
 }

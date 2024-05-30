@@ -3,8 +3,18 @@ import { View, ScrollView, Text, StyleSheet, ImageBackground, TouchableOpacity, 
 
 import CameraScreen from '../../components/CameraScreen';
 
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 export const TelaHome = () => {
     const [modalVisible, setModalVisible] = useState(false);
+
+    const storeData = async (value) => {
+        try {
+          await AsyncStorage.setItem('@payment_storage', value);
+        } catch (e) {
+          console.error(e);
+        }
+      };
 
     return (
         <ScrollView style={styles.container}>
@@ -31,7 +41,7 @@ export const TelaHome = () => {
                         <CameraScreen closeModal={() => setModalVisible(false)} />
                     </Modal>
                     <View>
-                        <TouchableOpacity style={styles.buttonTopExplore}>
+                        <TouchableOpacity onPress={() => storeData('false')} style={styles.buttonTopExplore}>
                             <Image source={require('../../images/comboshape.png')} />
                         </TouchableOpacity>
                     </View>
