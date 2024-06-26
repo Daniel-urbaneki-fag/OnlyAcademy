@@ -8,6 +8,8 @@ import { TelaPerfilUsuario } from './src/pages/TelaPerfilUsuario';
 import { TelaChat } from './src/pages/TelaChat';
 import { PaymentScreen } from './src/pages/TelaPagamento';
 
+import 'react-native-url-polyfill/auto';
+
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Tab = createBottomTabNavigator();

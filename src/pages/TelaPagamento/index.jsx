@@ -64,7 +64,7 @@ export const PaymentScreen = () => {
       },
     });
 
-	console.log(response)
+    console.log(response)
 
     const initPoint = response.data.init_point;
 
@@ -103,17 +103,17 @@ export const PaymentScreen = () => {
   return (
     <View style={styles.container}>
       <TouchableOpacity
-	  	style={styles.button}
+        style={styles.button}
         disabled={loading}
-		onPress={() => storeData('true')}
+        onPress={() => storeData('true')}
       ><Text style={styles.text}>Free</Text></TouchableOpacity>
       <TouchableOpacity
-	  	style={styles.button}
+        style={styles.button}
         onPress={() => handlePayment('monthly')}
         disabled={loading}
       ><Text style={styles.text}>Assinar Plano Mensal 100,00 R$</Text></TouchableOpacity>
       <TouchableOpacity
-	  	style={styles.button}
+        style={styles.button}
         onPress={() => handlePayment('annual')}
         disabled={loading}
       ><Text style={styles.text}>Assinar Plano Anual 1000,00 R$</Text></TouchableOpacity>
@@ -128,14 +128,14 @@ const styles = StyleSheet.create({
     height: '100%',
   },
   button: {
-	padding: 10,
-	marginBottom: 10,
-	borderRadius: 10,
-	backgroundColor: "#007EB5",
-	color: ""
+    padding: 10,
+    marginBottom: 10,
+    borderRadius: 10,
+    backgroundColor: "#007EB5",
+    color: ""
   },
   text: {
     fontSize: 18,
-	color: "#FFFFFF"
+    color: "#FFFFFF"
   },
 });
